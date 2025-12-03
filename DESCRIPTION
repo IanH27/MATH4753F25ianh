@@ -17,3 +17,15 @@ LazyData: true
 RoxygenNote: 7.3.2
 URL: https://github.com/IanH27/MATH4753F25ianh
 BugReports: https://github.com/IanH27/MATH4753F25ianh/issues
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Depends: 
+    R (>= 3.5)
+Imports:
+    stats,
+    graphics,
+    shiny

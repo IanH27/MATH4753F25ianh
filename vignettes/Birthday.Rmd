@@ -1,0 +1,56 @@
+---
+title: "Birthday"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Birthday}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+## 1. Mathematical Derivation
+
+The birthday problem asks: *what is the chance that at least two people in a group of $n$ share a birthday?*  
+
+It’s easier to compute the complement: the chance all birthdays are different. There are $365 \times 364 \times \cdots \times (365-n+1)$ ways for this to happen, out of $365^n$ possible outcomes:
+
+\[
+P(\text{no match}) = \frac{365 \times 364 \times \cdots \times (365-n+1)}{365^n}.
+\]
+
+So the probability of a duplicate is:
+
+\[
+P(\text{duplicate}) = 1 - P(\text{no match}).
+\]
+
+---
+
+## 2. Reformulation with `lfactorial` and `lchoose`
+
+The numerator can be written as $\binom{365}{n} \times n!$, giving:
+
+\[
+P(\text{duplicate}) = 1 - \frac{\binom{365}{n} \times n!}{365^n}.
+\]
+
+Using logarithms, we express this in R as:
+
+\[
+P(\text{duplicate}) = 1 - \exp\big( \log \binom{365}{n} + \log(n!) - n \log(365) \big).
+\]
+
+---
+
+## 3. The Function
+
+This is implemented in R as:
+
+```{r}
+MATH4753F25ianh::birthday
+```
